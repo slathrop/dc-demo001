@@ -1,23 +1,34 @@
 Data Collection - Demo 001
 =========
 
-Data collection application demo, originally intended for pharmaceuticals clinical trials.  Contains integrated forms builder, hipaa audit log, validation testing, and mobile computing components.  Has necessary components to become FDA and CCHIT certified.  This application represents approximately 200 hours worth of direct work, and two years of development efforts with the Meteor framework.
+Data Collection (DC) application demo with a focus on survey-style input and workflow, forked from a [Meteor](https://www.meteor.com/) example app originally intended for pharmaceutical clinical trials.
+
+This demo contains an integrated form builder, [HIPAA](https://en.wikipedia.org/wiki/HIPAA) audit log, validation testing, and mobile computing components.  It has the necessary components to become FDA and CCHIT certified.
+
+The original example code from which this app was forked represents approximately 200 hours worth of direct work, and two years of development effort with the Meteor framework.
 
 
 ============================
 #### Meteor Version
 
-1.1
-
+[1.1.0.3](https://github.com/meteor/meteor/blob/devel/History.md#v1103-2015-aug-03)
 
 ============================
-#### Install Application
+#### Install and Run Application
 
 ````sh
 git clone https://github.com/slathrop/dc-demo001.git
 cd dc-demo001
 meteor
 ````
+
+============================
+#### Vocabulary
+The terminology used by the original codebase from which this project was
+forked has been mapped into the data collection survey domain as follows:
+
+- Sponsor -> Respondent
+- (other mappings TBD)
 
 ============================
 #### Run Acceptance Tests
@@ -48,32 +59,7 @@ meteor add force-ssl
 ============================
 #### FDA Certification
 
-If you want to get FDA certified, you'll need to address the requirements in [Title 21, Part 11](http://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfcfr/CFRSearch.cfm?CFRPart=11).  Clinical-Trials currently ships with 800+ acceptance tests.  You'll probably need to increase them to close to 2000 tests to get the product ready for market, and another 2000 tests to address the regulatory requirements.  All told, if you aim for 4000 to 5000 tests, you'll probably be in the right ballpark.  
-
-
-============================
-#### Clinical Trial Protocol Templates  
-
-[Phase III Trials Protocol Template (NIH - Neurological Disorders and Stroke)](http://www.ninds.nih.gov/research/clinical_research/toolkit/protocol.htm)  
-[Clinical Trials Protocol Templates (NIH - Allergy and Infection Diseases)](http://www.niaid.nih.gov/labsandresources/resources/toolkit/protocol/Pages/protocol.aspx)  
-[Interventional Clinical Protocol Template (NIH - Dental and Craniofacial Research)](http://www.nidcr.nih.gov/Research/ToolsforResearchers/Toolkit/InterventionProtocolTemplate.htm)  
-
-
-============================
-#### Clinical Trial Protocol Examples  
-
-[Rimonabant 20mg for reducing cardiovascular events (Phase III)](http://www.stsiweb.org/images/uploads/CRESCENDOfinal.pdf_.pdf)  
-[Modafinil for Cocain Dependence (Phae II)](http://www.med.upenn.edu/ocr/protocol/sample/sample.html)  
-[Inclusion and Exclusion Criteria](http://www.unm.edu/~rrobergs/604Lect2.pdf)  
-
-
-
-============================
-#### Other Resources
-
-https://clinicaltrials.gov/
-
-
+If you want to get FDA certified, you'll need to address the requirements in [Title 21, Part 11](http://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfcfr/CFRSearch.cfm?CFRPart=11).  This app currently has 800+ acceptance tests.  You'll probably need to increase them to close to 2000 tests to get the product ready for market, and another 2000 tests to address the regulatory requirements.  All told, if you aim for 4000 to 5000 tests, you'll probably be in the right ballpark.  
 
 ------------------------
 ### Licensing
