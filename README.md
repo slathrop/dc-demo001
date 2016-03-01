@@ -27,8 +27,12 @@ meteor
 The terminology used by the original codebase from which this project was
 forked has been mapped into the data collection survey domain as follows:
 
-- Sponsor => Respondent
-- (other mappings TBD)
+- Subject => Respondent
+- Study => Study
+- Sponsor => Sponsor
+- Form => Survey
+- Visit => Interview
+- Casebook => Interviews
 
 ============================
 #### Run Acceptance Tests
