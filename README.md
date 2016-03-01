@@ -23,20 +23,18 @@ meteor
 #### Run Acceptance Tests
 
 ````sh
-
 # optional:  you may want to reset your application data
-terminal-a$ meteor reset
+meteor reset
 
 # run your application as usual
-terminal-a$ meteor
+meteor
 
 # then open up a second terminal and run_nightwatch to run all tests
-terminal-b$ sudo chmod g+x run_nightwatch.sh
-terminal-b$ sudo ./run_nightwatch.sh
+sudo chmod g+x run_nightwatch.sh
+sudo ./run_nightwatch.sh
 
 # or specify a specific test
-terminal-b$ sudo ./run_nightwatch.sh -t tests/homePage.js
-
+sudo ./run_nightwatch.sh -t tests/homePage.js
 ````
 
 ============================
