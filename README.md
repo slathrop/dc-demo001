@@ -1,21 +1,21 @@
-clinical-trials
+Data Collection - Demo 001
 =========
 
-Data collection application intended for pharmaceuticals clinical trials.  Contains integrated forms builder, hipaa audit log, validation testing, and mobile computing components.  Has necessary components to become FDA and CCHIT certified.  This application represents approximately 200 hours worth of direct work, and two years of development efforts with the Meteor framework.
+Data collection application demo, originally intended for pharmaceuticals clinical trials.  Contains integrated forms builder, hipaa audit log, validation testing, and mobile computing components.  Has necessary components to become FDA and CCHIT certified.  This application represents approximately 200 hours worth of direct work, and two years of development efforts with the Meteor framework.
 
 
 ============================
 #### Meteor Version
 
-0.9.2.2
+1.1
 
 
 ============================
 #### Install Application
 
 ````sh
-git clone https://github.com/awatson1978/clinical-trials.git
-cd clinical-trials
+git clone https://github.com/slathrop/dc-demo001.git
+cd dc-demo001
 meteor
 ````
 
