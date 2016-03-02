@@ -1,6 +1,3 @@
-
-
-
 //--------------------------------------------------------------
 // Accounts Entry Routes
 
@@ -96,14 +93,19 @@ Router.map(function() {
 //--------------------------------------------------------------
 // Routes
 
-renderHomePage = function(scope){
+renderHomePage = function(scope) {
   if (Meteor.userId()) {
     scope.render("homePage");
-    scope.render("navbarHeader", {to: 'header'});
+    scope.render("navbarHeader", {
+      to: 'header'
+    });
     //scope.render("sidebarTemplate",{to: 'aside'});
-  }else{
-    scope.render("landingPage");
-    scope.render("navbarHeader", {to: 'header'});
+  } else {
+    Router.go("/sign-in");
+
+    // scope.render("landingPage");
+    // scope.render("navbarHeader", {to: 'header'});
+
     //scope.render("sidebarTemplate",{to: 'aside'});
   }
 };
@@ -113,14 +115,14 @@ Router.map(function() {
 
   this.route('homePage', {
     path: '/',
-    template:'homePage',
+    template: 'homePage',
     yieldTemplates: getYieldTemplates(),
     onBeforeAction: function() {
       console.log('routing to: /');
     },
-    onAfterAction: function(){
+    onAfterAction: function() {
       renderHomePage(this);
-      setPageTitle("Landing Page");
+      setPageTitle("Penny Surveys");
 
       // the home page route is a hacky way to simulate an onLogin Hook
       Session.set('defaultUserProfileCard', 'basicInfoCard');
@@ -169,7 +171,5 @@ Router.map(function() {
       setPageTitle("About");
     }
   });
-
-
 
 });

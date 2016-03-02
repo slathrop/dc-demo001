@@ -6,4 +6,6 @@ Meteor.startup(function(){
   });
 
   bowser = BrowserObserver.init();
+
+  console.log('Meteor client startup completed.');
 });

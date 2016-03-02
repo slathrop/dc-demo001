@@ -2,7 +2,7 @@
 // http://nightwatchjs.org/api
 
 module.exports = {
-  "Form Builder" : function (client) {
+  "Survey Builder" : function (client) {
 
     var formName = "Test Form - " + Math.random().toString(10).slice(2,6);
 

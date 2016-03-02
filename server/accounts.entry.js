@@ -63,10 +63,10 @@ Meteor.startup(function(){
         console.log(record);
 
         //if(record.emails[0].verified === false){
-        Accounts.emailTemplates.siteName = "ClinicalTrials";
-        Accounts.emailTemplates.from = "ClinicalTrials Admin <accounts@clinical-trials.meteor.com>";
+        Accounts.emailTemplates.siteName = "PennySurveys";
+        Accounts.emailTemplates.from = "PennySurveys Admin <accounts@lincoln.meteor.com>";
         Accounts.emailTemplates.enrollAccount.subject = function (user) {
-            return "Welcome to ClinicalTrials, " + user.profile.name;
+            return "Welcome to PennySurveys, " + user.profile.name;
         };
         Accounts.emailTemplates.enrollAccount.text = function (user, url) {
            return "You have been selected to participate in building a better future!"

@@ -8,14 +8,14 @@ Session.setDefault('sponsorsListTableLimit', 50);
 
 
 
-Router.map(function(){
+Router.map(function() {
   this.route('sponsorsListRoute', {
     path: '/sponsors',
     template: 'sponsorsListPage',
-    onBeforeAction: function(){
+    onBeforeAction: function() {
       setPageTitle("Sponsors");
     },
-    waitOn: function(){
+    waitOn: function() {
       Meteor.subscribe('settings');
       return Meteor.subscribe('sponsors');
     },
@@ -27,60 +27,77 @@ Router.map(function(){
 });
 
 
+Template.sponsorsListPage.rendered = function() {
+  console.log('In sponsor list page rendered event.');
+  $(this.find('#sponsorsTable')).tablesorter();
 
-
+  Deps.autorun(function() {
+    setTimeout(function() {
+      $("#sponsorsTable").trigger("update");
+    }, 200);
+  });
+};
 
 
 //TODO: refactor sponsorsListBlock to sponsorsListPage
 Template.sponsorsListPage.helpers({
-  sponsorsList: function () {
+  sponsorsList: function() {
     Session.set('sponsorsListReceivedData', new Date());
     Session.set('sponsorsListPaginationCount', Math.floor(Sponsors.find().count() / Session.get('sponsorsListTableLimit')));
 
-    if(ClinicalTrials.checkForHexCode.test(Session.get('sponsorsListSearchFilter'))){
-      return Sponsors.find({_id: new Meteor.Collection.ObjectID(Session.get('sponsorsListSearchFilter'))});
-    }else{
-      return Sponsors.find({$or:[
-          {name: {
+    if (PennySurveys.checkForHexCode.test(Session.get('sponsorsListSearchFilter'))) {
+      return Sponsors.find({
+        _id: new Meteor.Collection.ObjectID(Session.get('sponsorsListSearchFilter'))
+      });
+    } else {
+      return Sponsors.find({
+        $or: [{
+          name: {
             $regex: Session.get('sponsorsListSearchFilter'),
             $options: 'i'
-          }},
-          {name: { $regex: Session.get('sponsorsListSearchFilter'), $options: 'i' }},
-          {description: { $regex: Session.get('sponsorsListSearchFilter'), $options: 'i' }},
-          {owner: { $regex: Session.get('sponsorsListSearchFilter'), $options: 'i' }}
-        ]},{
-          limit: Session.get('sponsorsListTableLimit'),
-          skip: Session.get('sponsorsListSkipCount'),
-          sort: {name: 1}
-        });
+          }
+        }, {
+          name: {
+            $regex: Session.get('sponsorsListSearchFilter'),
+            $options: 'i'
+          }
+        }, {
+          description: {
+            $regex: Session.get('sponsorsListSearchFilter'),
+            $options: 'i'
+          }
+        }, {
+          owner: {
+            $regex: Session.get('sponsorsListSearchFilter'),
+            $options: 'i'
+          }
+        }]
+      }, {
+        limit: Session.get('sponsorsListTableLimit'),
+        skip: Session.get('sponsorsListSkipCount'),
+        sort: {
+          name: 1
+        }
+      });
 
     }
     //return Sponsors.find({},{sort: {_id: -1}});
-  },
-  rendered: function(){
-    $(this.find('#sponsorsTable')).tablesorter();
-
-    Deps.autorun(function(){
-      setTimeout(function(){
-        $("#sponsorsTable").trigger("update");
-      }, 200);
-    });
   }
 });
 
 
 Template.sponsorsListPage.events({
-  'click .sponsorListItem': function () {
+  'click .sponsorListItem': function() {
     Session.set('selectedSponsorId', {
       _id: this._id,
       name: this.name
     });
     Router.go('/sponsor/' + this._id);
   },
-  'keyup #sponsorsSearchInput':function(){
+  'keyup #sponsorsSearchInput': function() {
     Session.set('sponsorsListSearchFilter', $('#sponsorsSearchInput').val());
   },
-  'click #createSponsorButton':function(){
+  'click #createSponsorButton': function() {
     Router.go('/newsponsor');
     //alert('click');
   }
@@ -90,23 +107,23 @@ Template.sponsorsListPage.events({
 
 
 
-Template.sponsorListItem.getId = function(){
-  if(this._id){
-    if(this._id._str){
+Template.sponsorListItem.getId = function() {
+  if (this._id) {
+    if (this._id._str) {
       return this._id._str;
-    }else{
+    } else {
       return this._id;
     }
-  }else{
+  } else {
     return "---";
   }
 };
 
 // sorry, this has a lot of double negatives
-Template.sponsorsListPage.isCrudPattern = function(){
-  if(Session.get('modalReturnRoute')){
+Template.sponsorsListPage.isCrudPattern = function() {
+  if (Session.get('modalReturnRoute')) {
     return false;
-  }else{
+  } else {
     return true;
   }
-}
+};

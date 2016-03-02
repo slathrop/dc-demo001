@@ -233,10 +233,10 @@ Template.navbarFooter.events({
         stared: false
       }},function(error, result){
         if(error){
-          HipaaLogger.logEvent("error", Meteor.userId(), "Forms", null, error, null, null);
+          HipaaLogger.logEvent("error", Meteor.userId(), "Surveys", null, error, null, null);
         }
         if(result){
-          HipaaLogger.logEvent("publish", Meteor.userId(), "Forms", self._id, null, null, null);
+          HipaaLogger.logEvent("publish", Meteor.userId(), "Surveys", self._id, null, null, null);
         }
       });
     }else{
@@ -244,10 +244,10 @@ Template.navbarFooter.events({
         stared: true
       }}, function(error, result){
         if(error){
-          HipaaLogger.logEvent("error", Meteor.userId(), "Forms", null, error, null, null);
+          HipaaLogger.logEvent("error", Meteor.userId(), "Surveys", null, error, null, null);
         }
         if(result){
-          HipaaLogger.logEvent("unpublish", Meteor.userId(), "Forms", self._id, null, null, null);
+          HipaaLogger.logEvent("unpublish", Meteor.userId(), "Surveys", self._id, null, null, null);
         }
       });
     }
@@ -292,10 +292,10 @@ saveForm = function(scope){
   }else{
     Forms.insert(newForm, function(error, result){
       if(error){
-        HipaaLogger.logEvent("error", Meteor.userId(), "Forms", null, error, null, null);
+        HipaaLogger.logEvent("error", Meteor.userId(), "Surveys", null, error, null, null);
       }
       if(result){
-        HipaaLogger.logEvent("create", Meteor.userId(), "Forms", result, null, null, null);
+        HipaaLogger.logEvent("create", Meteor.userId(), "Surveys", result, null, null, null);
       }
     });
   }

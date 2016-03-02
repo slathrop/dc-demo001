@@ -37,15 +37,15 @@
         <div class="col col-md-12">
           <div class="panel panel-default tile">
             <div class="panel-heading">
-              <h4>Forms</h4>
+              <h4>Surveys</h4>
             </div>
             <div class="panel-body">
               <table id="formsTable" class="table {{isDeletingView}} tablesorter">
                 <thead>
                   <tr>
                     <th>Stared</th>
-                    <th>Form ID</th>
-                    <th>Form Name</th>
+                    <th>Survey ID</th>
+                    <th>Survey Name</th>
                     <th>Owner</th>
                     <th># Blocks</th>
                     <th>Tags</th>
@@ -60,20 +60,20 @@
               </table>
             </div>
             <div class="panel-footer">
-              <div id="addFormToStudyButton" class="btn btn-info">Add Form to Study</div>
-              <div id="deleteFormFromStudyButton" class="btn btn-danger">Delete Form</div>
+              <div id="addFormToStudyButton" class="btn btn-info">Add Survey to Study</div>
+              <div id="deleteFormFromStudyButton" class="btn btn-danger">Delete Survey</div>
             </div>
           </div>
 
           <div class="panel panel-default tile">
             <div class="panel-heading">
-              <h4>Visits</h4>
+              <h4>Interviews</h4>
             </div>
             <div class="panel-body">
               <table id="visitsTable" class="table {{isDeletingVisitView}} tablesorter">
                 <thead>
                   <tr>
-                    <th>Visit Name</th>
+                    <th>Interview Name</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -89,11 +89,11 @@
             <div class="panel-footer">
               <div class="row">
                 <div class="col-md-6">
-                  <input id="visitLabelInput" class="form-control" type="text" placeholder="Visit Label" />
+                  <input id="visitLabelInput" class="form-control" type="text" placeholder="Interview Label" />
                 </div>
                 <div class="col-md-6">
-                  <div id="addVisitToStudyButton" class="btn btn-info">Add Visit to Study</div>
-                  <div id="deleteVisitFromStudyButton" class="btn btn-danger">Delete Visit</div>
+                  <div id="addVisitToStudyButton" class="btn btn-info">Add Interview to Study</div>
+                  <div id="deleteVisitFromStudyButton" class="btn btn-danger">Delete Interview</div>
                 </div>
 
               </div>

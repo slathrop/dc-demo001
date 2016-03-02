@@ -29,7 +29,7 @@
                 {{else}}
                   <div class="row">
                     <div class="col col-md-6 col-md-offset-3">
-                      <h2 class="fullwidth centered">Casebook</h2>
+                      <h2 class="fullwidth centered">Interviews</h2>
                       <ul id="casebookList" class="list-group">
                         {{#each visitsList}}
                           <a class="list-group-item studyVisit" tabindex="{{getTabIndex}}">
@@ -38,7 +38,7 @@
                           </a>
                         {{/each}}
                         <a class="list-group-item studyVisit" tabindex="{{getTabIndex}}">
-                          <h4 class="list-group-item-heading">Unscheduled Visit</h4>
+                          <h4 class="list-group-item-heading">Unscheduled Interview</h4>
                         </a>
                       </ul>
                     </div>
@@ -47,7 +47,7 @@
               {{else}}
                 <div class="row">
                   <div class="col col-md-6 col-md-offset-3">
-                    <h2 class="fullwidth centered">Select Subject</h2>
+                    <h2 class="fullwidth centered">Select Respondent</h2>
                     <input id="subjectSearchInput" type="text" class="fullwidth form-control" placeholder="Jane Doe">
                     <br>
                     <ul id="subjectsResultList" class="list-group">

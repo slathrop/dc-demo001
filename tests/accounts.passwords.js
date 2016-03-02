@@ -7,7 +7,7 @@ module.exports = {
 
     var username = "fozzybear";
     var userFullName = "Fozzy Bear";
-    var userEmail = "fozzy@clinical-trials.lifesupport.io";
+    var userEmail = "fozzy@lincoln.lifesupport.io";
     var originalPassword = "RubberChicken";
     var newPassword = "KnockKnock";
     var newNewPassword = "WockaWockaWocka";

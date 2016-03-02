@@ -31,7 +31,7 @@ Template.navbarHeader.helpers({
     if(Session.get('selectedSubject')){
       return Session.get('selectedSubject').name;
     }else{
-      return "No subject selected.";
+      return "No respondent selected";
     }
   },
   getUserName: function(){

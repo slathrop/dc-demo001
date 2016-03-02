@@ -8,7 +8,7 @@ Router.map(function(){
     path: '/new/subject',
     template: 'subjectsEditPage',
     onBeforeAction: function(){
-      setPageTitle("New Subject");
+      setPageTitle("New Respondent");
     }
   });
 
@@ -17,7 +17,7 @@ Router.map(function(){
     path: '/edit/study/:id',
     template: 'subjectsEditPage',
     onBeforeAction: function(){
-      setPageTitle("Edit Subject");
+      setPageTitle("Edit Respondent");
       Session.set('selectedSubjectId', this.params.id);
     },
     waitOn: function(){
@@ -77,7 +77,7 @@ Template.subjectsEditPage.events({
   'click #findSubjectSponsorButton':function(){
     var self = this;
     //console.log('this.id', this._id);
-    //if(ClinicalTrials.isAdminedBy(Meteor.userId())){
+    //if(PennySurveys.isAdminedBy(Meteor.userId())){
       Session.set('selectedUser', Meteor.userId());
 
       $('#sponsorSearchModal').modal("show");
@@ -189,7 +189,7 @@ Template.subjectsEditPage.helpers({
     if(this.name){
       return this.name;
     }else{
-      return "New Subject";
+      return "New Respondent";
     }
   },
   selectedSubject: function(){

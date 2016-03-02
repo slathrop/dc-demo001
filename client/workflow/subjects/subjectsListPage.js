@@ -12,7 +12,7 @@ Session.setDefault('subjectSkipCount', 0);
 //------------------------------------------------
 // ROUTING
 
-Router.map(function(){
+Router.map(function() {
   this.route('subjectsListPage', {
     path: '/subjects',
     template: 'subjectsListPage',
@@ -24,39 +24,50 @@ Router.map(function(){
         to: 'footer'
       }
     },
-    waitOn: function(){
+    waitOn: function() {
       return Meteor.subscribe('subjects');
     }
   });
 });
 
+// TEMPLATE LIFECYCLE
+Template.subjectsListPage.rendered = function() {
+  console.log('In respondents list page rendered');
+  $(this.find('#subjectsTable')).tablesorter();
+
+  Deps.autorun(function() {
+    console.log(Session.get('receivedData'));
+    setTimeout(function() {
+      $("#subjectsTable").trigger("update");
+    }, 200);
+  });
+};
+
+
 //------------------------------------------------
 // HELPERS
 
 Template.subjectsListPage.helpers({
-  subjectsList: function(){
+  subjectsList: function() {
     Session.set('receivedData', new Date());
     Session.set('subjectPaginationCount', Math.floor(Subjects.find().count() / Session.get('subjectTableLimit')));
     //return Forms.find({},{limit: Session.get('subjectTableLimit'), skip: Session.get('subjectSkipCount')});
 
-    if(Session.get('subjectSearchFilter').length === 17){
-      return Subjects.find({_id: Session.get('subjectSearchFilter')});
-    }else{
-      return Subjects.find({name: {
-        $regex: Session.get('subjectSearchFilter'),
-        $options: 'i'
-      }},{limit: Session.get('subjectTableLimit'), skip: Session.get('subjectSkipCount')});
+    if (Session.get('subjectSearchFilter').length === 17) {
+      return Subjects.find({
+        _id: Session.get('subjectSearchFilter')
+      });
+    } else {
+      return Subjects.find({
+        name: {
+          $regex: Session.get('subjectSearchFilter'),
+          $options: 'i'
+        }
+      }, {
+        limit: Session.get('subjectTableLimit'),
+        skip: Session.get('subjectSkipCount')
+      });
     }
-  },
-  rendered: function(){
-    $(this.find('#subjectsTable')).tablesorter();
-
-    Deps.autorun(function(){
-      console.log(Session.get('receivedData'))
-      setTimeout(function(){
-        $("#subjectsTable").trigger("update");
-      }, 200);
-    });
   }
 });
 
@@ -64,39 +75,39 @@ Template.subjectsListPage.helpers({
 
 
 Template.subjectsListPage.events({
-  'keyup #subjectSearchInput':function(){
+  'keyup #subjectSearchInput': function() {
     Session.set('subjectSearchFilter', $('#subjectSearchInput').val());
   },
-  'click #twentyButton':function(){
+  'click #twentyButton': function() {
     Session.set('subjectTableLimit', 20);
   },
-  'click #fiftyButton': function(){
+  'click #fiftyButton': function() {
     Session.set('subjectTableLimit', 50);
   },
-  'click #hundredButton': function(){
+  'click #hundredButton': function() {
     Session.set('subjectTableLimit', 100);
   },
-  'click .pagination-btn':function(){
+  'click .pagination-btn': function() {
     //alert(JSON.stringify(this.index));
     Session.set('subjectSelectedPagination', this.index);
     Session.set('subjectSkipCount', this.index * Session.get('subjectTableLimit'));
   },
-  'click .individualFormRow':function(){
+  'click .individualFormRow': function() {
     Session.set('currentForm', this._id);
     Router.go('/subjects/' + this._id);
     //alert(this._id);
   },
-  'click #createSubjectButton':function(){
+  'click #createSubjectButton': function() {
     Router.go('/new/subject/');
   }
 });
 
 
 Template.subjectsListPage.helpers({
-  getPaginationCount: function(){
+  getPaginationCount: function() {
     return Session.get('subjectPaginationCount');
   },
-  subjectsPaginationButtonList: function(){
+  subjectsPaginationButtonList: function() {
     var paginationArray = [];
     for (var i = 0; i < Session.get('subjectPaginationCount'); i++) {
       paginationArray[i] = {
@@ -105,18 +116,18 @@ Template.subjectsListPage.helpers({
     };
     return paginationArray;
   },
-  isTwentyActive: function(){
-    if(Session.get('subjectTableLimit') === 20){
+  isTwentyActive: function() {
+    if (Session.get('subjectTableLimit') === 20) {
       return "active";
     }
   },
-  isFiftyActive: function(){
-    if(Session.get('subjectTableLimit') === 50){
+  isFiftyActive: function() {
+    if (Session.get('subjectTableLimit') === 50) {
       return "active";
     }
   },
-  isHundredActive: function(){
-    if(Session.get('subjectTableLimit') === 100){
+  isHundredActive: function() {
+    if (Session.get('subjectTableLimit') === 100) {
       return "active";
     }
   }
@@ -125,12 +136,12 @@ Template.subjectsListPage.helpers({
 
 
 Template.subjectsPaginationButton.helpers({
-  pageActive: function(){
-    if(this.index === Session.get('subjectSelectedPagination')){
+  pageActive: function() {
+    if (this.index === Session.get('subjectSelectedPagination')) {
       return "active";
     }
   },
-  getPage: function(){
+  getPage: function() {
     return this.index + 1;
   }
 });
@@ -138,24 +149,32 @@ Template.subjectsPaginationButton.helpers({
 
 Template.subjectRowItem.events({
 
-  'click .fa-star':function(){
-    Forms.update({_id: this._id}, {$set:{
-      'stared':false
-    }});
+  'click .fa-star': function() {
+    Forms.update({
+      _id: this._id
+    }, {
+      $set: {
+        'stared': false
+      }
+    });
   },
-  'click .fa-star-o':function(){
-    Forms.update({_id: this._id}, {$set:{
-      'stared':true
-    }});
+  'click .fa-star-o': function() {
+    Forms.update({
+      _id: this._id
+    }, {
+      $set: {
+        'stared': true
+      }
+    });
 
   }
 });
 
 Template.subjectRowItem.helpers({
-  getStar:function(){
-    if(this.stared){
+  getStar: function() {
+    if (this.stared) {
       return 'fa-star';
-    }else{
+    } else {
       return 'fa-star-o';
     }
   }

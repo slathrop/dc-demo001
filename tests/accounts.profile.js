@@ -99,7 +99,7 @@ module.exports = {
       .verify.containsText('#profileUsername', "sysadmin")
       .verify.containsText('#profileFullName', "System Administrator")
       .verify.containsText('#profileBiography', "")
-      .verify.containsText('#profileSponsor', "clinical-trials.meteor.com")
+      .verify.containsText('#profileSponsor', "lincoln.meteor.com")
       .verify.attributeEquals('#profileAvatar', "src", "http://localhost:3000/images/icons/Default_User.png")
 
       .verify.containsText('#editProfileButton', "Edit Profile")
@@ -159,7 +159,7 @@ module.exports = {
       .verify.containsText('#profileEmailInput', "")
       .verify.containsText('#profileNameInput', "")
       .verify.containsText('#profileTitleInput', "")
-      .verify.attributeEquals('#findSponsorButton', "value", "clinical-trials.meteor.com")
+      .verify.attributeEquals('#findSponsorButton', "value", "lincoln.meteor.com")
       .verify.attributeEquals('#findRoleButton', "value", "SysAdmin")
       .verify.attributeEquals('#userAvatarImage', 'src', 'http://localhost:3000/images/icons/Default_User.png')
       .verify.containsText('#profilePhoneInput', "")
@@ -171,7 +171,7 @@ module.exports = {
 
 
       // .setValue('#profileUsernameInput', "sysadmin")
-      // .setValue('#profileEmailInput', "sysadmin@clinical-trials.meteor.com")
+      // .setValue('#profileEmailInput', "sysadmin@lincoln.meteor.com")
       // .setValue('#profileNameInput', "System Administrator")
       // .setValue('#profileTitleInput', "")
       // .setValue('#profilePhoneInput', "")

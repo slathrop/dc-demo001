@@ -31,6 +31,20 @@ Router.map(function(){
 });
 
 //------------------------------------------------
+// TEMPLATE LIFECYCLE
+
+Template.commentsListPage.rendered = function(){
+  $(this.find('#commentsTable')).tablesorter();
+
+  Deps.autorun(function(){
+    console.log(Session.get('receivedData'));
+    setTimeout(function(){
+      $("#commentsTable").trigger("update");
+    }, 200);
+  });
+};
+
+//------------------------------------------------
 // HELPERS
 
 Template.commentsListPage.helpers({
@@ -48,16 +62,6 @@ Template.commentsListPage.helpers({
     //   }},{limit: Session.get('commentsTableLimit'), skip: Session.get('commentsSkipCount')});
     // }
     return Comments.find();
-  },
-  rendered: function(){
-    $(this.find('#commentsTable')).tablesorter();
-
-    Deps.autorun(function(){
-      console.log(Session.get('receivedData'))
-      setTimeout(function(){
-        $("#commentsTable").trigger("update");
-      }, 200);
-    });
   }
 });
 

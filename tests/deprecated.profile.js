@@ -115,7 +115,7 @@
 //       .verify.visible('#profileZipInput')
 //
 //       .verify.attributeEquals('#profileUsernameInput', "value", "sysadmin")
-//       .verify.attributeEquals('#profileEmailInput', "value", "sysadmin@clinical-trials.meteor.com")
+//       .verify.attributeEquals('#profileEmailInput', "value", "sysadmin@lincoln.meteor.com")
 //       .verify.attributeEquals('#profileNameInput', "value", "System Administrator")
 //       .verify.attributeEquals('#profileTitleInput', "value", "")
 //       .verify.containsText('#findRoleButton', "SysAdmin")

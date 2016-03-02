@@ -1,4 +1,4 @@
-ClinicalTrials = {
+PennySurveys = {
   isAdminedBy: function(userId){
     var user = Meteor.users.findOne(userId);
     // we need to use == instead of === because we're comparing a String to an array value

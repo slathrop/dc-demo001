@@ -16,7 +16,7 @@ Template.appLayout.rendered = function(){
     revertDuration: 5,
     stop: function(event, ui){
       //console.log(document.querySelectorAll( ":hover" ));
-      console.log(document.elementFromPoint(Session.get('mouseMoveX'),Session.get('mouseMoveY')).id)
+      console.log(document.elementFromPoint(Session.get('mouseMoveX'),Session.get('mouseMoveY')).id);
     }
     //grid: [ 10, 10 ],
     //opacity: 0.35

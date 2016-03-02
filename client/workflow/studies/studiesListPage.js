@@ -12,7 +12,7 @@ Session.setDefault('studySkipCount', 0);
 //------------------------------------------------
 // ROUTING
 
-Router.map(function(){
+Router.map(function() {
   this.route('studiesListPage', {
     path: '/studies',
     template: 'studiesListPage',
@@ -27,39 +27,48 @@ Router.map(function(){
     onBeforeAction: function() {
       setPageTitle("Studies");
     },
-    waitOn: function(){
+    waitOn: function() {
       return Meteor.subscribe('studies');
     }
   });
 });
 
+Template.studiesListPage.rendered = function() {
+  $(this.find('#studiesTable')).tablesorter();
+
+  Deps.autorun(function() {
+    console.log(Session.get('receivedData'));
+    setTimeout(function() {
+      $("#studiesTable").trigger("update");
+    }, 200);
+  });
+};
+
+
 //------------------------------------------------
 // HELPERS
 
 Template.studiesListPage.helpers({
-  studiesList: function(){
+  studiesList: function() {
     Session.set('receivedData', new Date());
     Session.set('studyPaginationCount', Math.floor(Studies.find().count() / Session.get('studyTableLimit')));
     //return Forms.find({},{limit: Session.get('studyTableLimit'), skip: Session.get('studySkipCount')});
 
-    if(Session.get('studySearchFilter').length === 17){
-      return Studies.find({_id: Session.get('studySearchFilter')});
-    }else{
-      return Studies.find({name: {
-        $regex: Session.get('studySearchFilter'),
-        $options: 'i'
-      }},{limit: Session.get('studyTableLimit'), skip: Session.get('studySkipCount')});
+    if (Session.get('studySearchFilter').length === 17) {
+      return Studies.find({
+        _id: Session.get('studySearchFilter')
+      });
+    } else {
+      return Studies.find({
+        name: {
+          $regex: Session.get('studySearchFilter'),
+          $options: 'i'
+        }
+      }, {
+        limit: Session.get('studyTableLimit'),
+        skip: Session.get('studySkipCount')
+      });
     }
-  },
-  rendered: function(){
-    $(this.find('#studiesTable')).tablesorter();
-
-    Deps.autorun(function(){
-      console.log(Session.get('receivedData'))
-      setTimeout(function(){
-        $("#studiesTable").trigger("update");
-      }, 200);
-    });
   }
 });
 
@@ -67,39 +76,39 @@ Template.studiesListPage.helpers({
 
 
 Template.studiesListPage.events({
-  'keyup #studySearchInput':function(){
+  'keyup #studySearchInput': function() {
     Session.set('studySearchFilter', $('#studySearchInput').val());
   },
-  'click #twentyButton':function(){
+  'click #twentyButton': function() {
     Session.set('studyTableLimit', 20);
   },
-  'click #fiftyButton': function(){
+  'click #fiftyButton': function() {
     Session.set('studyTableLimit', 50);
   },
-  'click #hundredButton': function(){
+  'click #hundredButton': function() {
     Session.set('studyTableLimit', 100);
   },
-  'click .pagination-btn':function(){
+  'click .pagination-btn': function() {
     //alert(JSON.stringify(this.index));
     Session.set('studySelectedPagination', this.index);
     Session.set('studySkipCount', this.index * Session.get('studyTableLimit'));
   },
-  'click .individualFormRow':function(){
+  'click .individualFormRow': function() {
     Session.set('currentForm', this._id);
     Router.go('/studies/' + this._id);
     //alert(this._id);
   },
-  'click #createStudyButton':function(){
+  'click #createStudyButton': function() {
     Router.go('/new/study/');
   }
 });
 
 
 Template.studiesListPage.helpers({
-  getPaginationCount: function(){
+  getPaginationCount: function() {
     return Session.get('studyPaginationCount');
   },
-  studiesPaginationButtonList: function(){
+  studiesPaginationButtonList: function() {
     var paginationArray = [];
     for (var i = 0; i < Session.get('studyPaginationCount'); i++) {
       paginationArray[i] = {
@@ -108,18 +117,18 @@ Template.studiesListPage.helpers({
     };
     return paginationArray;
   },
-  isTwentyActive: function(){
-    if(Session.get('studyTableLimit') === 20){
+  isTwentyActive: function() {
+    if (Session.get('studyTableLimit') === 20) {
       return "active";
     }
   },
-  isFiftyActive: function(){
-    if(Session.get('studyTableLimit') === 50){
+  isFiftyActive: function() {
+    if (Session.get('studyTableLimit') === 50) {
       return "active";
     }
   },
-  isHundredActive: function(){
-    if(Session.get('studyTableLimit') === 100){
+  isHundredActive: function() {
+    if (Session.get('studyTableLimit') === 100) {
       return "active";
     }
   }
@@ -128,12 +137,12 @@ Template.studiesListPage.helpers({
 
 
 Template.studiesPaginationButton.helpers({
-  pageActive: function(){
-    if(this.index === Session.get('studySelectedPagination')){
+  pageActive: function() {
+    if (this.index === Session.get('studySelectedPagination')) {
       return "active";
     }
   },
-  getPage: function(){
+  getPage: function() {
     return this.index + 1;
   }
 });
@@ -141,24 +150,32 @@ Template.studiesPaginationButton.helpers({
 
 Template.studyRowItem.events({
 
-  'click .fa-star':function(){
-    Forms.update({_id: this._id}, {$set:{
-      'stared':false
-    }});
+  'click .fa-star': function() {
+    Forms.update({
+      _id: this._id
+    }, {
+      $set: {
+        'stared': false
+      }
+    });
   },
-  'click .fa-star-o':function(){
-    Forms.update({_id: this._id}, {$set:{
-      'stared':true
-    }});
+  'click .fa-star-o': function() {
+    Forms.update({
+      _id: this._id
+    }, {
+      $set: {
+        'stared': true
+      }
+    });
 
   }
 });
 
 Template.studyRowItem.helpers({
-  getStar:function(){
-    if(this.stared){
+  getStar: function() {
+    if (this.stared) {
       return 'fa-star';
-    }else{
+    } else {
       return 'fa-star-o';
     }
   }
